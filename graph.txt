@@ -1,0 +1,25 @@
+digraph structs {
+	rankdir=HR;
+	el7        [shape=record,label="{{pos: 0 | ind: 7} | { <f1>prev: 0 | value: 9.000000 | <f2> next: 4}}"];
+	el4        [shape=record,label="{{pos: 1 | ind: 4} | { <f1>prev: 7 | value: 6.000000 | <f2> next: 6}}"];
+	el6        [shape=record,label="{{pos: 2 | ind: 6} | { <f1>prev: 4 | value: 8.000000 | <f2> next: 2}}"];
+	el2        [shape=record,label="{{pos: 3 | ind: 2} | { <f1>prev: 6 | value: 2.000000 | <f2> next: 3}}"];
+	el3        [shape=record,label="{{pos: 4 | ind: 3} | { <f1>prev: 2 | value: 5.000000 | <f2> next: 5}}"];
+	el5        [shape=record,label="{{pos: 5 | ind: 5} | { <f1>prev: 3 | value: 7.000000 | <f2> next: 8}}"];
+	el8        [shape=record,label="{{pos: 6 | ind: 8} | { <f1>prev: 5 | value: 10.000000 | <f2> next: 9}}"];
+	el9        [shape=record,label="{{pos: 7 | ind: 9} | { <f1>prev: 8 | value: 11.000000 | <f2> next: 0}}"];
+	el7       :<f2> -> el4        [color="red"]
+	el4       :<f2> -> el6        [color="red"]
+	el4       :<f1> -> el7        [color="blue"]
+	el6       :<f2> -> el2        [color="red"]
+	el6       :<f1> -> el4        [color="blue"]
+	el2       :<f2> -> el3        [color="red"]
+	el2       :<f1> -> el6        [color="blue"]
+	el3       :<f2> -> el5        [color="red"]
+	el3       :<f1> -> el2        [color="blue"]
+	el5       :<f2> -> el8        [color="red"]
+	el5       :<f1> -> el3        [color="blue"]
+	el8       :<f2> -> el9        [color="red"]
+	el8       :<f1> -> el5        [color="blue"]
+	el9       :<f1> -> el8        [color="blue"]
+}

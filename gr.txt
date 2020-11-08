@@ -1,0 +1,7 @@
+digraph structs {
+  rankdir=HR;
+  el5 [shape=record,label="{ <f0> ind 5 | { <f1> 0 | 2 | <f2> 6 }}" ];
+  el6 [shape=record,label="{ <f0> ind 6 | { <f1> 5 | 3 | <f2> 0 }}" ];
+  el5:<f2> -> el6:<f0> [color="red"];
+  el6:<f1> -> el5:<f0> [color="blue"];
+}

@@ -26,3 +26,5 @@ void pop_back(struct LinkedList* list);
 void pop_front(struct LinkedList* list);
 void print_list(struct LinkedList* list);
 void push_i(struct LinkedList* list, Elem_t value, size_t index);
+void pop_i(struct LinkedList* list, size_t index);
+void make_graph(struct LinkedList* list);
