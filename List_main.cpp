@@ -15,6 +15,7 @@ int main() {
     list_push_i(list, 10, 6);
     list_push_back(list, 11);
     list_pop_i(list, 2);
+    list_sort(list);
     list_dump(list);
     return 0;
 }

@@ -184,6 +184,9 @@ int list_ok(struct LinkedList* list) {
         if (cur_ind == 0) {
             return INDEXERRORS;
         }
+        if (i == list->size - 1 && cur_ind != list->last) {
+            return LASTINDEXERROR;
+        }
         cur_ind = list->array[cur_ind].next;
         if (i == list->size - 1 && cur_ind != 0) {
             return INDEXERRORS;
@@ -196,8 +199,8 @@ void list_dump(struct LinkedList* list) {
     FILE* output = fopen("listdump.txt", "w");
     assert(output);
 
-    #define DEF_ERROR(error, number)             \
-        if (result == number) {                  \
+    #define DEF_ERROR(error, number)              \
+        if (result == number) {                   \
             fprintf(output, " (%s) {\n", #error); \
         } else
 
@@ -263,4 +266,36 @@ void list_make_graph(struct LinkedList* list) {
     fprintf(output, "}");
     fclose(output);
     system("dot -Tsvg graph.txt > img.svg");
+}
+
+void list_sort(struct LinkedList* list) {
+    assert(list);
+
+    ASSERT_OK
+
+    struct Node* new_array = (struct Node*)calloc(list->capacity, sizeof(struct Node));
+    assert(new_array);
+    size_t cur_ind = list->first;
+    for (size_t i = 0; i < list->size; ++i) {
+        new_array[i + 1].value = list->array[cur_ind].value;
+        new_array[i + 1].prev = i;
+        new_array[i + 1].next = i + 2;
+        cur_ind = list->array[cur_ind].next;
+    }
+    new_array[list->size].next = 0;
+    free(list->array);
+    list->array = new_array;
+    list->first_free = list->size + 1;
+    list->first = 1;
+    list->last = list->size;
+
+    ASSERT_OK
+}
+
+Elem_t list_get_i_sorted(struct LinkedList* list, size_t index) {
+    assert(list);
+
+    ASSERT_OK
+
+    return list->array[index + 1].value;
 }

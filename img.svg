@@ -11,14 +11,14 @@
  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" style="font-family:Times-Roman;font-size:14.00;">
 <title>structs</title>
-<!-- el6 -->
-<g id="node1" class="node"><title>el6</title>
+<!-- el1 -->
+<g id="node1" class="node"><title>el1</title>
 <polygon style="fill:none;stroke:black;" points="5,85 170,85 170,5 5,5 5,85"/>
 <text text-anchor="middle" x="47" y="22">pos:</text>
 <text text-anchor="middle" x="47" y="38"> 0</text>
 <polyline style="fill:none;stroke:black;" points="89,45 89,5 "/>
 <text text-anchor="middle" x="129" y="22">ind:</text>
-<text text-anchor="middle" x="129" y="38"> 6</text>
+<text text-anchor="middle" x="129" y="38"> 1</text>
 <polyline style="fill:none;stroke:black;" points="5,45 170,45 "/>
 <text text-anchor="middle" x="28" y="62">prev:</text>
 <text text-anchor="middle" x="28" y="78"> 0</text>
@@ -27,159 +27,159 @@
 <text text-anchor="middle" x="88" y="78"> 9.000000</text>
 <polyline style="fill:none;stroke:black;" points="125,85 125,45 "/>
 <text text-anchor="middle" x="147" y="62">next:</text>
-<text text-anchor="middle" x="147" y="78"> 4</text>
+<text text-anchor="middle" x="147" y="78"> 2</text>
 </g>
-<!-- el4 -->
-<g id="node2" class="node"><title>el4</title>
+<!-- el2 -->
+<g id="node2" class="node"><title>el2</title>
 <polygon style="fill:none;stroke:black;" points="64,201 229,201 229,121 64,121 64,201"/>
 <text text-anchor="middle" x="106" y="138">pos:</text>
 <text text-anchor="middle" x="106" y="154"> 1</text>
 <polyline style="fill:none;stroke:black;" points="148,161 148,121 "/>
 <text text-anchor="middle" x="188" y="138">ind:</text>
-<text text-anchor="middle" x="188" y="154"> 4</text>
+<text text-anchor="middle" x="188" y="154"> 2</text>
 <polyline style="fill:none;stroke:black;" points="64,161 229,161 "/>
 <text text-anchor="middle" x="87" y="178">prev:</text>
-<text text-anchor="middle" x="87" y="194"> 6</text>
+<text text-anchor="middle" x="87" y="194"> 1</text>
 <polyline style="fill:none;stroke:black;" points="110,201 110,161 "/>
 <text text-anchor="middle" x="147" y="178">value:</text>
 <text text-anchor="middle" x="147" y="194"> 6.000000</text>
 <polyline style="fill:none;stroke:black;" points="184,201 184,161 "/>
 <text text-anchor="middle" x="206" y="178">next:</text>
-<text text-anchor="middle" x="206" y="194"> 5</text>
+<text text-anchor="middle" x="206" y="194"> 3</text>
 </g>
-<!-- el6&#45;&gt;el4 -->
-<g id="edge2" class="edge"><title>el6&#45;&gt;el4</title>
+<!-- el1&#45;&gt;el2 -->
+<g id="edge2" class="edge"><title>el1&#45;&gt;el2</title>
 <path style="fill:none;stroke:red;" d="M147,85C147,93 146,102 146,111"/>
 <polygon style="fill:red;stroke:red;" points="150,111 146,121 143,111 150,111"/>
 </g>
-<!-- el4&#45;&gt;el6 -->
-<g id="edge6" class="edge"><title>el4&#45;&gt;el6</title>
+<!-- el2&#45;&gt;el1 -->
+<g id="edge6" class="edge"><title>el2&#45;&gt;el1</title>
 <path style="fill:none;stroke:blue;" d="M87,161C87,144 87,118 87,95"/>
 <polygon style="fill:blue;stroke:blue;" points="84,95 87,85 91,95 84,95"/>
 </g>
-<!-- el5 -->
-<g id="node3" class="node"><title>el5</title>
+<!-- el3 -->
+<g id="node3" class="node"><title>el3</title>
 <polygon style="fill:none;stroke:black;" points="123,317 288,317 288,237 123,237 123,317"/>
 <text text-anchor="middle" x="165" y="254">pos:</text>
 <text text-anchor="middle" x="165" y="270"> 2</text>
 <polyline style="fill:none;stroke:black;" points="207,277 207,237 "/>
 <text text-anchor="middle" x="247" y="254">ind:</text>
-<text text-anchor="middle" x="247" y="270"> 5</text>
+<text text-anchor="middle" x="247" y="270"> 3</text>
 <polyline style="fill:none;stroke:black;" points="123,277 288,277 "/>
 <text text-anchor="middle" x="146" y="294">prev:</text>
-<text text-anchor="middle" x="146" y="310"> 4</text>
+<text text-anchor="middle" x="146" y="310"> 2</text>
 <polyline style="fill:none;stroke:black;" points="169,317 169,277 "/>
 <text text-anchor="middle" x="206" y="294">value:</text>
 <text text-anchor="middle" x="206" y="310"> 8.000000</text>
 <polyline style="fill:none;stroke:black;" points="243,317 243,277 "/>
 <text text-anchor="middle" x="265" y="294">next:</text>
-<text text-anchor="middle" x="265" y="310"> 2</text>
+<text text-anchor="middle" x="265" y="310"> 4</text>
 </g>
-<!-- el4&#45;&gt;el5 -->
-<g id="edge4" class="edge"><title>el4&#45;&gt;el5</title>
+<!-- el2&#45;&gt;el3 -->
+<g id="edge4" class="edge"><title>el2&#45;&gt;el3</title>
 <path style="fill:none;stroke:red;" d="M206,201C206,209 205,218 205,227"/>
 <polygon style="fill:red;stroke:red;" points="209,227 205,237 202,227 209,227"/>
 </g>
-<!-- el5&#45;&gt;el4 -->
-<g id="edge10" class="edge"><title>el5&#45;&gt;el4</title>
+<!-- el3&#45;&gt;el2 -->
+<g id="edge10" class="edge"><title>el3&#45;&gt;el2</title>
 <path style="fill:none;stroke:blue;" d="M146,277C146,260 146,234 146,211"/>
 <polygon style="fill:blue;stroke:blue;" points="143,211 146,201 150,211 143,211"/>
 </g>
-<!-- el2 -->
-<g id="node4" class="node"><title>el2</title>
+<!-- el4 -->
+<g id="node4" class="node"><title>el4</title>
 <polygon style="fill:none;stroke:black;" points="182,433 347,433 347,353 182,353 182,433"/>
 <text text-anchor="middle" x="224" y="370">pos:</text>
 <text text-anchor="middle" x="224" y="386"> 3</text>
 <polyline style="fill:none;stroke:black;" points="266,393 266,353 "/>
 <text text-anchor="middle" x="306" y="370">ind:</text>
-<text text-anchor="middle" x="306" y="386"> 2</text>
+<text text-anchor="middle" x="306" y="386"> 4</text>
 <polyline style="fill:none;stroke:black;" points="182,393 347,393 "/>
 <text text-anchor="middle" x="205" y="410">prev:</text>
-<text text-anchor="middle" x="205" y="426"> 5</text>
+<text text-anchor="middle" x="205" y="426"> 3</text>
 <polyline style="fill:none;stroke:black;" points="228,433 228,393 "/>
 <text text-anchor="middle" x="265" y="410">value:</text>
 <text text-anchor="middle" x="265" y="426"> 2.000000</text>
 <polyline style="fill:none;stroke:black;" points="302,433 302,393 "/>
 <text text-anchor="middle" x="324" y="410">next:</text>
-<text text-anchor="middle" x="324" y="426"> 3</text>
+<text text-anchor="middle" x="324" y="426"> 5</text>
 </g>
-<!-- el5&#45;&gt;el2 -->
-<g id="edge8" class="edge"><title>el5&#45;&gt;el2</title>
+<!-- el3&#45;&gt;el4 -->
+<g id="edge8" class="edge"><title>el3&#45;&gt;el4</title>
 <path style="fill:none;stroke:red;" d="M265,317C265,325 264,334 264,343"/>
 <polygon style="fill:red;stroke:red;" points="268,343 264,353 261,343 268,343"/>
 </g>
-<!-- el2&#45;&gt;el5 -->
-<g id="edge14" class="edge"><title>el2&#45;&gt;el5</title>
+<!-- el4&#45;&gt;el3 -->
+<g id="edge14" class="edge"><title>el4&#45;&gt;el3</title>
 <path style="fill:none;stroke:blue;" d="M205,393C205,376 205,350 205,327"/>
 <polygon style="fill:blue;stroke:blue;" points="202,327 205,317 209,327 202,327"/>
 </g>
-<!-- el3 -->
-<g id="node5" class="node"><title>el3</title>
+<!-- el5 -->
+<g id="node5" class="node"><title>el5</title>
 <polygon style="fill:none;stroke:black;" points="241,549 406,549 406,469 241,469 241,549"/>
 <text text-anchor="middle" x="283" y="486">pos:</text>
 <text text-anchor="middle" x="283" y="502"> 4</text>
 <polyline style="fill:none;stroke:black;" points="325,509 325,469 "/>
 <text text-anchor="middle" x="365" y="486">ind:</text>
-<text text-anchor="middle" x="365" y="502"> 3</text>
+<text text-anchor="middle" x="365" y="502"> 5</text>
 <polyline style="fill:none;stroke:black;" points="241,509 406,509 "/>
 <text text-anchor="middle" x="264" y="526">prev:</text>
-<text text-anchor="middle" x="264" y="542"> 2</text>
+<text text-anchor="middle" x="264" y="542"> 4</text>
 <polyline style="fill:none;stroke:black;" points="287,549 287,509 "/>
 <text text-anchor="middle" x="324" y="526">value:</text>
 <text text-anchor="middle" x="324" y="542"> 5.000000</text>
 <polyline style="fill:none;stroke:black;" points="361,549 361,509 "/>
 <text text-anchor="middle" x="383" y="526">next:</text>
-<text text-anchor="middle" x="383" y="542"> 7</text>
+<text text-anchor="middle" x="383" y="542"> 6</text>
 </g>
-<!-- el2&#45;&gt;el3 -->
-<g id="edge12" class="edge"><title>el2&#45;&gt;el3</title>
+<!-- el4&#45;&gt;el5 -->
+<g id="edge12" class="edge"><title>el4&#45;&gt;el5</title>
 <path style="fill:none;stroke:red;" d="M324,433C324,441 323,450 323,459"/>
 <polygon style="fill:red;stroke:red;" points="327,459 323,469 320,459 327,459"/>
 </g>
-<!-- el3&#45;&gt;el2 -->
-<g id="edge18" class="edge"><title>el3&#45;&gt;el2</title>
+<!-- el5&#45;&gt;el4 -->
+<g id="edge18" class="edge"><title>el5&#45;&gt;el4</title>
 <path style="fill:none;stroke:blue;" d="M264,509C264,492 264,466 264,443"/>
 <polygon style="fill:blue;stroke:blue;" points="261,443 264,433 268,443 261,443"/>
 </g>
-<!-- el7 -->
-<g id="node6" class="node"><title>el7</title>
+<!-- el6 -->
+<g id="node6" class="node"><title>el6</title>
 <polygon style="fill:none;stroke:black;" points="298,665 470,665 470,585 298,585 298,665"/>
 <text text-anchor="middle" x="341" y="602">pos:</text>
 <text text-anchor="middle" x="341" y="618"> 5</text>
 <polyline style="fill:none;stroke:black;" points="385,625 385,585 "/>
 <text text-anchor="middle" x="427" y="602">ind:</text>
-<text text-anchor="middle" x="427" y="618"> 7</text>
+<text text-anchor="middle" x="427" y="618"> 6</text>
 <polyline style="fill:none;stroke:black;" points="298,625 470,625 "/>
 <text text-anchor="middle" x="321" y="642">prev:</text>
-<text text-anchor="middle" x="321" y="658"> 3</text>
+<text text-anchor="middle" x="321" y="658"> 5</text>
 <polyline style="fill:none;stroke:black;" points="344,665 344,625 "/>
 <text text-anchor="middle" x="384" y="642">value:</text>
 <text text-anchor="middle" x="384" y="658"> 10.000000</text>
 <polyline style="fill:none;stroke:black;" points="425,665 425,625 "/>
 <text text-anchor="middle" x="447" y="642">next:</text>
-<text text-anchor="middle" x="447" y="658"> 8</text>
+<text text-anchor="middle" x="447" y="658"> 7</text>
 </g>
-<!-- el3&#45;&gt;el7 -->
-<g id="edge16" class="edge"><title>el3&#45;&gt;el7</title>
+<!-- el5&#45;&gt;el6 -->
+<g id="edge16" class="edge"><title>el5&#45;&gt;el6</title>
 <path style="fill:none;stroke:red;" d="M383,549C383,557 384,566 384,575"/>
 <polygon style="fill:red;stroke:red;" points="388,575 384,585 381,575 388,575"/>
 </g>
-<!-- el7&#45;&gt;el3 -->
-<g id="edge22" class="edge"><title>el7&#45;&gt;el3</title>
+<!-- el6&#45;&gt;el5 -->
+<g id="edge22" class="edge"><title>el6&#45;&gt;el5</title>
 <path style="fill:none;stroke:blue;" d="M321,625C322,608 322,582 322,559"/>
 <polygon style="fill:blue;stroke:blue;" points="319,559 322,549 326,559 319,559"/>
 </g>
-<!-- el8 -->
-<g id="node7" class="node"><title>el8</title>
+<!-- el7 -->
+<g id="node7" class="node"><title>el7</title>
 <polygon style="fill:none;stroke:black;" points="361,781 532,781 532,701 361,701 361,781"/>
 <text text-anchor="middle" x="404" y="718">pos:</text>
 <text text-anchor="middle" x="404" y="734"> 6</text>
 <polyline style="fill:none;stroke:black;" points="448,741 448,701 "/>
 <text text-anchor="middle" x="490" y="718">ind:</text>
-<text text-anchor="middle" x="490" y="734"> 8</text>
+<text text-anchor="middle" x="490" y="734"> 7</text>
 <polyline style="fill:none;stroke:black;" points="361,741 532,741 "/>
 <text text-anchor="middle" x="384" y="758">prev:</text>
-<text text-anchor="middle" x="384" y="774"> 7</text>
+<text text-anchor="middle" x="384" y="774"> 6</text>
 <polyline style="fill:none;stroke:black;" points="407,781 407,741 "/>
 <text text-anchor="middle" x="447" y="758">value:</text>
 <text text-anchor="middle" x="447" y="774"> 11.000000</text>
@@ -187,13 +187,13 @@
 <text text-anchor="middle" x="509" y="758">next:</text>
 <text text-anchor="middle" x="509" y="774"> 0</text>
 </g>
-<!-- el7&#45;&gt;el8 -->
-<g id="edge20" class="edge"><title>el7&#45;&gt;el8</title>
+<!-- el6&#45;&gt;el7 -->
+<g id="edge20" class="edge"><title>el6&#45;&gt;el7</title>
 <path style="fill:none;stroke:red;" d="M447,665C447,673 446,682 446,691"/>
 <polygon style="fill:red;stroke:red;" points="450,691 446,701 443,691 450,691"/>
 </g>
-<!-- el8&#45;&gt;el7 -->
-<g id="edge24" class="edge"><title>el8&#45;&gt;el7</title>
+<!-- el7&#45;&gt;el6 -->
+<g id="edge24" class="edge"><title>el7&#45;&gt;el6</title>
 <path style="fill:none;stroke:blue;" d="M384,741C384,724 384,698 384,675"/>
 <polygon style="fill:blue;stroke:blue;" points="381,675 384,665 388,675 381,675"/>
 </g>
