@@ -108,7 +108,6 @@ void list_push_i(struct LinkedList* list, Elem_t value, size_t index) {
     if (index == list->size) {
         list->last = place_to_insert;
     }
-
     list->size++;
 
     ASSERT_OK

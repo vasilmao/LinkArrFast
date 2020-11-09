@@ -16,6 +16,7 @@ int main() {
     list_push_back(list, 11);
     list_pop_i(list, 2);
     list_sort(list);
+    printf("%lf\n", list_get_i_sorted(list, 3));
     list_dump(list);
     return 0;
 }
