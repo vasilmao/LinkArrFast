@@ -6,7 +6,25 @@
     #define ASSERT_OK
 #endif
 
-#define
+#define LINK_PUSH_BACK {                              \
+    list->array[place_to_insert].next = 0;            \
+    list->array[place_to_insert].prev = list->last;   \
+    list->array[list->last].next = place_to_insert;   \
+}
+
+#define LINK_PUSH_FRONT {                             \
+    list->array[place_to_insert].prev = 0;            \
+    list->array[place_to_insert].next = list->first;  \
+    list->array[list->first].prev = place_to_insert;  \
+}
+
+#define LINK_PUSH_MIDDLE {                            \
+    size_t before_i = list->array[last_i].prev;       \
+    list->array[place_to_insert].next = last_i;       \
+    list->array[place_to_insert].prev = before_i;     \
+    list->array[last_i].prev = place_to_insert;       \
+    list->array[before_i].next = place_to_insert;     \
+}
 
 struct LinkedList* construct(size_t capacity) {
     assert(capacity > 0);
@@ -77,19 +95,11 @@ void list_push_i(struct LinkedList* list, Elem_t value, size_t index) {
     }
 
     if (last_i == 0) {
-        list->array[place_to_insert].next = 0;
-        list->array[place_to_insert].prev = list->last;
-        list->array[list->last].next = place_to_insert;
+        LINK_PUSH_BACK
     } else if (list->array[last_i].prev == 0) {
-        list->array[place_to_insert].prev = 0;
-        list->array[place_to_insert].next = list->first;
-        list->array[list->first].prev = place_to_insert;
+        LINK_PUSH_FRONT
     } else {
-        size_t before_i = list->array[last_i].prev;
-        list->array[place_to_insert].next = last_i;
-        list->array[place_to_insert].prev = before_i;
-        list->array[last_i].prev = place_to_insert;
-        list->array[before_i].next = place_to_insert;
+        LINK_PUSH_MIDDLE
     }
 
     if (index == 0) {
