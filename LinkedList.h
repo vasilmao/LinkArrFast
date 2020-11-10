@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include <math.h>
 
 typedef double Elem_t;
 
@@ -27,18 +28,21 @@ struct LinkedList {
     size_t size;
 };
 
-struct LinkedList* construct(size_t capacity);
-Elem_t list_get_i       (struct LinkedList* list, size_t index);
-Elem_t list_get_front   (struct LinkedList* list);
-Elem_t list_get_back    (struct LinkedList* list);
-void   list_push_back   (struct LinkedList* list, Elem_t value);
-void   list_push_front  (struct LinkedList* list, Elem_t value);
-void   list_pop_back    (struct LinkedList* list);
-void   list_pop_front   (struct LinkedList* list);
-void   list_push_i      (struct LinkedList* list, Elem_t value, size_t index);
-void   list_pop_i       (struct LinkedList* list, size_t index);
-void   list_make_graph  (struct LinkedList* list);
-void   list_dump        (struct LinkedList* list);
-int    list_ok          (struct LinkedList* list);
-void   list_sort        (struct LinkedList* list);
-Elem_t list_get_i_sorted(struct LinkedList* list, size_t index);
+struct LinkedList* construct (size_t capacity);
+Elem_t list_get_i            (struct LinkedList* list, size_t index);
+Elem_t list_get_front        (struct LinkedList* list);
+Elem_t list_get_back         (struct LinkedList* list);
+Elem_t get_physical_index    (struct LinkedList* list, size_t index);
+void   list_push_back        (struct LinkedList* list, Elem_t value);
+void   list_push_front       (struct LinkedList* list, Elem_t value);
+void   push_after_i          (struct LinkedList* list, Elem_t value, size_t index);
+void   push_before_i         (struct LinkedList* list, Elem_t value, size_t index);
+void   list_pop_back         (struct LinkedList* list);
+void   list_pop_front        (struct LinkedList* list);
+void   pop_physical_i        (struct LinkedList* list, size_t pop_i);
+void   list_make_graph       (struct LinkedList* list);
+void   list_dump             (struct LinkedList* list);
+int    list_ok               (struct LinkedList* list);
+void   list_sort             (struct LinkedList* list);
+Elem_t list_get_i_sorted     (struct LinkedList* list, size_t index);
+void   pop_physical_i        (struct LinkedList* list, size_t pop_i);

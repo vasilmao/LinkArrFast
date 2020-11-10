@@ -1,12 +1,13 @@
 digraph structs {
 	rankdir=HR;
-	el1        [shape=record,label="{{pos:\n 0 | ind:\n 1} | { <f1>prev:\n 0 | value:\n 9.000000 | <f2> next:\n 2}}"];
-	el2        [shape=record,label="{{pos:\n 1 | ind:\n 2} | { <f1>prev:\n 1 | value:\n 6.000000 | <f2> next:\n 3}}"];
-	el3        [shape=record,label="{{pos:\n 2 | ind:\n 3} | { <f1>prev:\n 2 | value:\n 8.000000 | <f2> next:\n 4}}"];
-	el4        [shape=record,label="{{pos:\n 3 | ind:\n 4} | { <f1>prev:\n 3 | value:\n 2.000000 | <f2> next:\n 5}}"];
-	el5        [shape=record,label="{{pos:\n 4 | ind:\n 5} | { <f1>prev:\n 4 | value:\n 5.000000 | <f2> next:\n 6}}"];
-	el6        [shape=record,label="{{pos:\n 5 | ind:\n 6} | { <f1>prev:\n 5 | value:\n 10.000000 | <f2> next:\n 7}}"];
-	el7        [shape=record,label="{{pos:\n 6 | ind:\n 7} | { <f1>prev:\n 6 | value:\n 11.000000 | <f2> next:\n 0}}"];
+	el1        [shape=record,label="{{pos:\n 0 | ind:\n 1} | { <f1>prev:\n 0 | value:\n 4.000000 | <f2> next:\n 2}}"];
+	el2        [shape=record,label="{{pos:\n 1 | ind:\n 2} | { <f1>prev:\n 1 | value:\n 1.000000 | <f2> next:\n 3}}"];
+	el3        [shape=record,label="{{pos:\n 2 | ind:\n 3} | { <f1>prev:\n 2 | value:\n -1.000000 | <f2> next:\n 4}}"];
+	el4        [shape=record,label="{{pos:\n 3 | ind:\n 4} | { <f1>prev:\n 3 | value:\n 1.000000 | <f2> next:\n 5}}"];
+	el5        [shape=record,label="{{pos:\n 4 | ind:\n 5} | { <f1>prev:\n 4 | value:\n 2.000000 | <f2> next:\n 6}}"];
+	el6        [shape=record,label="{{pos:\n 5 | ind:\n 6} | { <f1>prev:\n 5 | value:\n 1.000000 | <f2> next:\n 7}}"];
+	el7        [shape=record,label="{{pos:\n 6 | ind:\n 7} | { <f1>prev:\n 6 | value:\n -1.000000 | <f2> next:\n 8}}"];
+	el8        [shape=record,label="{{pos:\n 7 | ind:\n 8} | { <f1>prev:\n 7 | value:\n 6.000000 | <f2> next:\n 0}}"];
 	el1       :<f2> -> el2        [color="red"];
 	el2       :<f2> -> el3        [color="red"];
 	el2       :<f1> -> el1        [color="blue"];
@@ -18,5 +19,7 @@ digraph structs {
 	el5       :<f1> -> el4        [color="blue"];
 	el6       :<f2> -> el7        [color="red"];
 	el6       :<f1> -> el5        [color="blue"];
+	el7       :<f2> -> el8        [color="red"];
 	el7       :<f1> -> el6        [color="blue"];
+	el8       :<f1> -> el7        [color="blue"];
 }

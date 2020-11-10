@@ -1,19 +1,19 @@
-LinkedList [00722B80] (LISTOK) {
+LinkedList [007E1670] (LISTOK) {
 	capacity   = 500 
-	size       = 7   
-	first_free = 8   
+	size       = 8   
+	first_free = 9   
 	first      = 1   
-	last       = 7   
-	array [00724C78] {
+	last       = 8   
+	array [007E5BC8] {
 		[0  ] = {next: 0    | prev: 0    | value: 0.000000}
-		[1  ] = {next: 2    | prev: 0    | value: 9.000000}
-		[2  ] = {next: 3    | prev: 1    | value: 6.000000}
-		[3  ] = {next: 4    | prev: 2    | value: 8.000000}
-		[4  ] = {next: 5    | prev: 3    | value: 2.000000}
-		[5  ] = {next: 6    | prev: 4    | value: 5.000000}
-		[6  ] = {next: 7    | prev: 5    | value: 10.000000}
-		[7  ] = {next: 0    | prev: 6    | value: 11.000000}
-		[8  ] = {next: 0    | prev: 0    | value: 0.000000}
+		[1  ] = {next: 2    | prev: 0    | value: 4.000000}
+		[2  ] = {next: 3    | prev: 1    | value: 1.000000}
+		[3  ] = {next: 4    | prev: 2    | value: -1.000000}
+		[4  ] = {next: 5    | prev: 3    | value: 1.000000}
+		[5  ] = {next: 6    | prev: 4    | value: 2.000000}
+		[6  ] = {next: 7    | prev: 5    | value: 1.000000}
+		[7  ] = {next: 8    | prev: 6    | value: -1.000000}
+		[8  ] = {next: 0    | prev: 7    | value: 6.000000}
 		[9  ] = {next: 0    | prev: 0    | value: 0.000000}
 		[10 ] = {next: 0    | prev: 0    | value: 0.000000}
 		[11 ] = {next: 0    | prev: 0    | value: 0.000000}
