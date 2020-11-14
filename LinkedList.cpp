@@ -1,7 +1,7 @@
 #include "LinkedList.h"
 
 #ifdef _DEBUG
-    #define ASSERT_OK {if (list_ok(list) != LISTOK) {list_dump(list); assert(!"OK");}}
+    #define ASSERT_OK {if (LinkedList_ok(list) != LISTOK) {LinkedList_dump(list); assert(!"OK");}}
 #else
     #define ASSERT_OK
 #endif
@@ -16,29 +16,31 @@
     list->last = push_index;                               \
     list->size++;
 
-struct LinkedList* construct(size_t capacity) {
+struct LinkedList* LinkedList_construct(size_t capacity) {
     assert(capacity > 0);
     struct LinkedList* list = (struct LinkedList*)calloc(1, sizeof(struct LinkedList));
     list->array = (struct Node*)calloc(capacity, sizeof(struct Node));
     list->capacity = capacity;
     list->first_free = 1;
     list->size = 0;
-    for (size_t i = 1; i < capacity - 1; ++i) {
+    for (size_t i = 0; i < capacity; ++i) {
         list->array[i].value = NAN;
-        list->array[i].next = i + 1;
+        if (i < capacity - 1 && i > 0) {
+            list->array[i].next = i + 1;
+        }
     }
     ASSERT_OK
 
     return list;
 }
 
-Elem_t get_physical_index(struct LinkedList* list, size_t index) {
+Elem_t LinkedList_get_physical_index(struct LinkedList* list, size_t index) {
     assert(list);
     assert(0 <= index && index < list->size);
 
     ASSERT_OK
 
-    printf("WARNING! THIS IS SLOW OPERATION!!1!\n");
+    printf("WARNING! GETTING PHYSICAL INDEX IS SLOW OPERATION!!1!\n");
     size_t phys_i = list->first;
     size_t cnt = index;
     while (cnt > 0) {
@@ -50,7 +52,7 @@ Elem_t get_physical_index(struct LinkedList* list, size_t index) {
     ASSERT_OK
 }
 
-Elem_t list_get_i(struct LinkedList* list, size_t index) {
+Elem_t LinkedList_get_i(struct LinkedList* list, size_t index) {
     assert(list);
     assert(0 <= index && index < list->size);
 
@@ -59,39 +61,39 @@ Elem_t list_get_i(struct LinkedList* list, size_t index) {
     return list->array[index].value;
 }
 
-Elem_t list_get_front(struct LinkedList* list) {
-    return list_get_i(list, list->first);
+Elem_t LinkedList_get_front(struct LinkedList* list) {
+    return LinkedList_get_i(list, list->first);
 }
 
-Elem_t list_get_back(struct LinkedList* list) {
-    return list_get_i(list, list->last);
+Elem_t LinkedList_get_back(struct LinkedList* list) {
+    return LinkedList_get_i(list, list->last);
 }
 
-void list_push_back(struct LinkedList* list, Elem_t value) {
+void LinkedList_push_back(struct LinkedList* list, Elem_t value) {
     if (list->size == 0) {
         INSERT_EMPTY
     } else {
-        push_after_i(list, value, list->last);
+        LinkedList_push_after_i(list, value, list->last);
     }
 }
 
-void list_push_front(struct LinkedList* list, Elem_t value) {
+void LinkedList_push_front(struct LinkedList* list, Elem_t value) {
     if (list->size == 0) {
         INSERT_EMPTY
     } else {
-        push_before_i(list, value, list->first);
+        LinkedList_push_before_i(list, value, list->first);
     }
 }
 
-void list_pop_back(struct LinkedList* list) {
-    pop_physical_i(list, list->last);
+void LinkedList_pop_back(struct LinkedList* list) {
+    LinkedList_pop_physical_i(list, list->last);
 }
 
-void list_pop_front(struct LinkedList* list) {
-    pop_physical_i(list, list->first);
+void LinkedList_pop_front(struct LinkedList* list) {
+    LinkedList_pop_physical_i(list, list->first);
 }
 
-void push_after_i(struct LinkedList* list, Elem_t value, size_t index) {
+void LinkedList_push_after_i(struct LinkedList* list, Elem_t value, size_t index) {
     assert(list);
     assert(list->size > 0);
     assert(!isnan(list->array[index].value));
@@ -119,10 +121,9 @@ void push_after_i(struct LinkedList* list, Elem_t value, size_t index) {
     list->size++;
 
     ASSERT_OK
-
 }
 
-void push_before_i(struct LinkedList* list, Elem_t value, size_t index) {
+void LinkedList_push_before_i(struct LinkedList* list, Elem_t value, size_t index) {
     assert(list);
     assert(list->size > 0);
     assert(!isnan(list->array[index].value));
@@ -153,7 +154,7 @@ void push_before_i(struct LinkedList* list, Elem_t value, size_t index) {
 
 }
 
-void pop_physical_i(struct LinkedList* list, size_t pop_i) {
+void LinkedList_pop_physical_i(struct LinkedList* list, size_t pop_i) {
     assert(list);
     assert(!isnan(list->array[pop_i].value));
 
@@ -188,7 +189,7 @@ void pop_physical_i(struct LinkedList* list, size_t pop_i) {
 
 }
 
-int list_ok(struct LinkedList* list) {
+int LinkedList_ok(struct LinkedList* list) {
     assert(list);
 
     if (list->size < 0) {
@@ -226,7 +227,7 @@ int list_ok(struct LinkedList* list) {
     return LISTOK;
 }
 
-void list_dump(struct LinkedList* list) {
+void LinkedList_dump(struct LinkedList* list) {
     FILE* output = fopen("listdump.txt", "w");
     assert(output);
 
@@ -237,7 +238,7 @@ void list_dump(struct LinkedList* list) {
 
 
     fprintf(output, "LinkedList [%p]", list);
-    int result = list_ok(list);
+    int result = LinkedList_ok(list);
     #include "errors.h"
     /*else*/ printf("(error number %d) {\n", result);
     #undef DEF_ERROR
@@ -249,16 +250,20 @@ void list_dump(struct LinkedList* list) {
     fprintf(output, "\tlast       = %-4zu\n", list->last);
     fprintf(output, "\tarray [%p] {\n", list->array);
     for (size_t i = 0; i < list->capacity; ++i) {
+        // size_t last_elem = list->array[cur_elem].prev;
+        // size_t next_elem = list->array[cur_elem].next;
+        // cur_elem = i;
+        // printf("i am %zu, last is %zu, next is %zu\n", i, last_elem, next_elem);
         fprintf(output, "\t\t[%-3zu] = {next: %-4zu | prev: %-4zu | value: %lf}\n", i, list->array[i].next, list->array[i].prev, list->array[i].value);
     }
     fprintf(output, "\t}\n}");
     fclose(output);
 
-    list_make_graph(list);
+    LinkedList_make_graph(list);
 }
 
 
-void list_make_graph(struct LinkedList* list) {
+void LinkedList_make_graph(struct LinkedList* list) {
     assert(list);
 
     const char* start_str = "digraph structs {\n\trankdir=HR;\n";
@@ -267,27 +272,38 @@ void list_make_graph(struct LinkedList* list) {
     fprintf(output, start_str);
     size_t cur_elem = list->first;
     struct Node* array = list->array;
-    for (size_t i = 0; i < list->size; ++i) {
-        if (cur_elem == 0) {
-            break;
-        }
+    for (size_t i = 0; i < list->capacity; ++i) {
+        // if (cur_elem == 0) {
+        //     break;
+        // }
+        //fprintf(output, "\tel%-8zu [shape=record,label=\"{{pos:\\n %zu | ind:\\n %zu} | { <f1>prev:\\n %zu | value:\\n %lf | <f2> next:\\n %zu}}\"];\n", cur_elem, i, cur_elem, last_elem, array[cur_elem].value, next_elem);
+        cur_elem = i;
         size_t last_elem = array[cur_elem].prev;
         size_t next_elem = array[cur_elem].next;
-        fprintf(output, "\tel%-8zu [shape=record,label=\"{{pos:\\n %zu | ind:\\n %zu} | { <f1>prev:\\n %zu | value:\\n %lf | <f2> next:\\n %zu}}\"];\n", cur_elem, i, cur_elem, last_elem, array[cur_elem].value, next_elem);
-        cur_elem = array[cur_elem].next;
+        fprintf(output, "\tel%-8zu [shape=record,label=\"{{<f0> phys pos:\\n %zu} | { <f1>prev:\\n %zu | value:\\n %lf | <f2> next:\\n %zu}}\"", i, i, last_elem, array[cur_elem].value, next_elem);
+        if (isnan(array[cur_elem].value)) {
+            fprintf(output, "style=filled,color=\"red\"]\n");
+        } else {
+            fprintf(output, "]\n");
+        }
+        if (i < list->capacity - 1) {
+            fprintf(output, "el%-8zu ->el%-8zu [style=invis]", i, i + 1);
+        }
+        //cur_elem = array[cur_elem].next;
     }
     cur_elem = list->first;
-    for (size_t i = 0; i < list->size; ++i) {
-        if (cur_elem == 0) {
-            break;
-        }
+    for (size_t i = 0; i < list->capacity; ++i) {
+        // if (cur_elem == 0) {
+        //     break;
+        // }
+        cur_elem = i;
         size_t last_elem = array[cur_elem].prev;
         size_t next_elem = array[cur_elem].next;
         if (next_elem != 0) {
-            fprintf(output, "\tel%-8zu:<f2> -> el%-8zu [color=\"red\"];\n", cur_elem, next_elem);
+            fprintf(output, "\tel%-8zu:<f2> -> el%-8zu:<f0> [color=\"red\"];\n", cur_elem, next_elem);
         }
         if (last_elem != 0) {
-            fprintf(output, "\tel%-8zu:<f1> -> el%-8zu [color=\"blue\"];\n", cur_elem, last_elem);
+            fprintf(output, "\tel%-8zu:<f1> -> el%-8zu:<f0> [color=\"blue\"];\n", cur_elem, last_elem);
         }
         cur_elem = array[cur_elem].next;
     }
@@ -296,7 +312,7 @@ void list_make_graph(struct LinkedList* list) {
     //system("dot -Tsvg graph.txt > img.svg");
 }
 
-void list_sort(struct LinkedList* list) {
+void LinkedList_sort(struct LinkedList* list) {
     assert(list);
 
     ASSERT_OK
@@ -327,7 +343,7 @@ void list_sort(struct LinkedList* list) {
     ASSERT_OK
 }
 
-Elem_t list_get_i_sorted(struct LinkedList* list, size_t index) {
+Elem_t LinkedList_get_i_sorted(struct LinkedList* list, size_t index) {
     assert(list);
     assert(index < list->size);
     assert(list->sorted);

@@ -7,36 +7,41 @@ void test_sort(struct LinkedList* list);
 
 
 int main() {
-    struct LinkedList* list = construct(500);
-    test(list);
+    struct LinkedList* list = LinkedList_construct(500);
+    //test(list);
     test_get_index(list);
-    test_sort(list);
-    list_dump(list);
+    LinkedList_dump(list);
+    //test_sort(list);
     return 0;
 }
 
 
 
 void test_sort(struct LinkedList* list) {
-    list_sort(list);
-    printf("%lf\n", list_get_i_sorted(list, 2));
+    LinkedList_sort(list);
+    printf("%lf\n", LinkedList_get_i_sorted(list, 2));
 }
 
 void test_get_index(struct LinkedList* list) {
-    size_t physical_ind = get_physical_index(list, 2);
-    push_after_i(list, -1, physical_ind);
-    push_after_i(list, 1, physical_ind);
-    push_before_i(list, -1, physical_ind);
-    push_before_i(list, 1, physical_ind);
+    LinkedList_push_back(list, 0.1); // логически 0
+    LinkedList_push_back(list, 0.2); // log 1
+    LinkedList_push_back(list, 0.3); // log 2
+    LinkedList_push_back(list, 0.4); // log 3
+    LinkedList_push_back(list, 0.5); // log 4
+    size_t physical_ind = LinkedList_get_physical_index(list, 2);
+    LinkedList_push_after_i(list, -10, physical_ind);
+    LinkedList_push_after_i(list, 10, physical_ind);
+    LinkedList_push_before_i(list, -20, physical_ind);
+    LinkedList_push_before_i(list, 20, physical_ind);
 }
 
 void test(struct LinkedList* list) {
-    list_push_back(list, 1);
-    list_push_back(list, 2);
-    list_push_back(list, 3);
-    list_push_front(list, 4);
-    list_push_front(list, 5);
-    list_pop_back(list);
-    list_push_back(list, 6);
-    list_pop_front(list);
+    LinkedList_push_back(list, 1);
+    LinkedList_push_back(list, 2);
+    LinkedList_push_back(list, 3);
+    LinkedList_push_front(list, 4);
+    LinkedList_push_front(list, 5);
+    LinkedList_pop_back(list);
+    LinkedList_push_back(list, 6);
+    LinkedList_pop_front(list);
 }
