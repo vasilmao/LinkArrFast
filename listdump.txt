@@ -1,10 +1,10 @@
-LinkedList [00FC2B88] (LISTOK) {
+LinkedList [00712B88] (LISTOK) {
 	capacity   = 500 
 	size       = 9   
 	first_free = 10  
 	first      = 1   
 	last       = 5   
-	array [00FC2D38] {
+	array [00712D38] {
 		[0  ] = {next: 0    | prev: 0    | value: 1.#QNAN0}
 		[1  ] = {next: 2    | prev: 0    | value: 0.100000}
 		[2  ] = {next: 8    | prev: 1    | value: 0.200000}

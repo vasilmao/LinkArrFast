@@ -20,6 +20,8 @@ int main() {
 void test_sort(struct LinkedList* list) {
     LinkedList_sort(list);
     printf("%lf\n", LinkedList_get_i_sorted(list, 2));
+    LinkedList_push_back(list, 1000);
+    printf("%d\n", list->sorted);
 }
 
 void test_get_index(struct LinkedList* list) {

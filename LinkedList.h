@@ -23,8 +23,8 @@ struct LinkedList {
     Node* array;
     size_t capacity;
     size_t first_free;
-    size_t first;
-    size_t last;
+    size_t head;
+    size_t tail;
     size_t size;
     bool sorted = false;
 };
