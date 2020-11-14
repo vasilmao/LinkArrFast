@@ -26,6 +26,7 @@ struct LinkedList {
     size_t first;
     size_t last;
     size_t size;
+    bool sorted = false;
 };
 
 struct LinkedList* construct (size_t capacity);

@@ -14,7 +14,7 @@
     list->array[push_index].value = value;                 \
     list->first = push_index;                              \
     list->last = push_index;                               \
-    list->size++;                                          \
+    list->size++;
 
 struct LinkedList* construct(size_t capacity) {
     assert(capacity > 0);
@@ -28,6 +28,7 @@ struct LinkedList* construct(size_t capacity) {
         list->array[i].next = i + 1;
     }
     ASSERT_OK
+
     return list;
 }
 
@@ -36,6 +37,7 @@ Elem_t get_physical_index(struct LinkedList* list, size_t index) {
     assert(0 <= index && index < list->size);
 
     ASSERT_OK
+
     printf("WARNING! THIS IS SLOW OPERATION!!1!\n");
     size_t phys_i = list->first;
     size_t cnt = index;
@@ -96,15 +98,21 @@ void push_after_i(struct LinkedList* list, Elem_t value, size_t index) {
 
     ASSERT_OK
 
+    list->sorted = false;
+
+    struct Node* array = list->array;
+
     size_t place_to_insert = list->first_free;
     list->first_free = list->array[list->first_free].next;
-    list->array[place_to_insert].value = value;
-    list->array[place_to_insert].next = list->array[index].next;
-    list->array[place_to_insert].prev = index;
-    list->array[index].next = place_to_insert;
-    size_t right = list->array[place_to_insert].next;
+
+    array[place_to_insert].value = value;
+    array[place_to_insert].next  = list->array[index].next;
+    array[place_to_insert].prev  = index;
+    array[index].next            = place_to_insert;
+
+    size_t right = array[place_to_insert].next;
     if (right != 0) {
-        list->array[right].prev = place_to_insert;
+        array[right].prev = place_to_insert;
     } else {
         list->last = place_to_insert;
     }
@@ -121,15 +129,21 @@ void push_before_i(struct LinkedList* list, Elem_t value, size_t index) {
 
     ASSERT_OK
 
+    list->sorted = false;
+
+    struct Node* array = list->array;
+
     size_t place_to_insert = list->first_free;
     list->first_free = list->array[list->first_free].next;
-    list->array[place_to_insert].value = value;
-    list->array[place_to_insert].next = index;
-    list->array[place_to_insert].prev = list->array[index].prev;
-    list->array[index].prev = place_to_insert;
-    size_t left = list->array[place_to_insert].prev;
+
+    array[place_to_insert].value = value;
+    array[place_to_insert].next  = index;
+    array[place_to_insert].prev  = list->array[index].prev;
+    array[index].prev            = place_to_insert;
+
+    size_t left = array[place_to_insert].prev;
     if (left != 0) {
-        list->array[left].next = place_to_insert;
+        array[left].next = place_to_insert;
     } else {
         list->first = place_to_insert;
     }
@@ -145,23 +159,28 @@ void pop_physical_i(struct LinkedList* list, size_t pop_i) {
 
     ASSERT_OK
 
-    size_t left_i = list->array[pop_i].prev;
-    size_t right_i = list->array[pop_i].next;
+    list->sorted = false;
+
+    struct Node* array = list->array;
+
+    size_t left_i = array[pop_i].prev;
+    size_t right_i = array[pop_i].next;
     if (left_i != 0) {
-        list->array[left_i].next = right_i;
+        array[left_i].next = right_i;
     } else {
         list->first = right_i;
     }
 
     if (right_i != 0) {
-        list->array[right_i].prev = left_i;
+        array[right_i].prev = left_i;
     } else {
         list->last = left_i;
     }
 
-    list->array[pop_i].value = NAN;
-    list->array[pop_i].prev = 0;
-    list->array[pop_i].next = list->first_free;
+    array[pop_i].value = NAN;
+    array[pop_i].prev  = 0;
+    array[pop_i].next  = list->first_free;
+
     list->first_free = pop_i;
     list->size--;
 
@@ -242,38 +261,35 @@ void list_dump(struct LinkedList* list) {
 void list_make_graph(struct LinkedList* list) {
     assert(list);
 
-    if (list->size == 0) {
-        //TODO: something else
-        return;
-    }
     const char* start_str = "digraph structs {\n\trankdir=HR;\n";
     FILE* output = fopen("graph.txt", "w");
     assert(output);
     fprintf(output, start_str);
     size_t cur_elem = list->first;
+    struct Node* array = list->array;
     for (size_t i = 0; i < list->size; ++i) {
         if (cur_elem == 0) {
             break;
         }
-        size_t last_elem = list->array[cur_elem].prev;
-        size_t next_elem = list->array[cur_elem].next;
-        fprintf(output, "\tel%-8zu [shape=record,label=\"{{pos:\\n %zu | ind:\\n %zu} | { <f1>prev:\\n %zu | value:\\n %lf | <f2> next:\\n %zu}}\"];\n", cur_elem, i, cur_elem, last_elem, list->array[cur_elem].value, next_elem);
-        cur_elem = list->array[cur_elem].next;
+        size_t last_elem = array[cur_elem].prev;
+        size_t next_elem = array[cur_elem].next;
+        fprintf(output, "\tel%-8zu [shape=record,label=\"{{pos:\\n %zu | ind:\\n %zu} | { <f1>prev:\\n %zu | value:\\n %lf | <f2> next:\\n %zu}}\"];\n", cur_elem, i, cur_elem, last_elem, array[cur_elem].value, next_elem);
+        cur_elem = array[cur_elem].next;
     }
     cur_elem = list->first;
     for (size_t i = 0; i < list->size; ++i) {
         if (cur_elem == 0) {
             break;
         }
-        size_t last_elem = list->array[cur_elem].prev;
-        size_t next_elem = list->array[cur_elem].next;
+        size_t last_elem = array[cur_elem].prev;
+        size_t next_elem = array[cur_elem].next;
         if (next_elem != 0) {
             fprintf(output, "\tel%-8zu:<f2> -> el%-8zu [color=\"red\"];\n", cur_elem, next_elem);
         }
         if (last_elem != 0) {
             fprintf(output, "\tel%-8zu:<f1> -> el%-8zu [color=\"blue\"];\n", cur_elem, last_elem);
         }
-        cur_elem = list->array[cur_elem].next;
+        cur_elem = array[cur_elem].next;
     }
     fprintf(output, "}");
     fclose(output);
@@ -288,11 +304,16 @@ void list_sort(struct LinkedList* list) {
     struct Node* new_array = (struct Node*)calloc(list->capacity, sizeof(struct Node));
     assert(new_array);
     size_t cur_ind = list->first;
+    new_array[0].value = NAN;
     for (size_t i = 0; i < list->size; ++i) {
         new_array[i + 1].value = list->array[cur_ind].value;
         new_array[i + 1].prev = i;
         new_array[i + 1].next = i + 2;
         cur_ind = list->array[cur_ind].next;
+    }
+    for (size_t i = list->size + 1; i < list->capacity; ++i) {
+        new_array[i].next = i + 1;
+        new_array[i].value = NAN;
     }
     new_array[list->size].next = 0;
     free(list->array);
@@ -301,11 +322,15 @@ void list_sort(struct LinkedList* list) {
     list->first = 1;
     list->last = list->size;
 
+    list->sorted = true;
+
     ASSERT_OK
 }
 
 Elem_t list_get_i_sorted(struct LinkedList* list, size_t index) {
     assert(list);
+    assert(index < list->size);
+    assert(list->sorted);
 
     ASSERT_OK
 
