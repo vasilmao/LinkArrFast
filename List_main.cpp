@@ -22,10 +22,16 @@ void test_sort(struct LinkedList* list) {
     //printf("%lf\n", LinkedList_get_i_sorted(list, 2));
     //LinkedList_push_back(list, 1000);
     LinkedList_pop_front(list);
-    //LinkedList_pop_front(list);
-    //LinkedList_push_back(list, 1000);
-    //LinkedList_push_front(list, 2000);
-    printf("%d\n", list->sorted);
+    LinkedList_pop_front(list);
+    LinkedList_push_back(list, 1000);
+    LinkedList_push_front(list, 2000);
+    LinkedList_push_front(list, 3000);
+    LinkedList_push_front(list, 4000);
+    if (list->sorted) {
+        printf("Oh! List is still sorted\n");
+    } else {
+        printf("List is not sorted now\n");
+    }
 }
 
 void test_get_index(struct LinkedList* list) {

@@ -1,19 +1,19 @@
-LinkedList [00E52B88] (LISTOK) {
+LinkedList [00C72B88] (LISTOK) {
 	capacity   = 500 
-	size       = 4   
-	first_free = 1   
-	head       = 2   
-	tail       = 5   
-	sorted     = 1   
-	array [00E55C88] {
+	size       = 7   
+	first_free = 8   
+	head       = 7   
+	tail       = 6   
+	sorted     = 0   
+	array [00C75C88] {
 		[0  ] = {next: 0    | prev: 0    | value: 1.#QNAN0}
-		[1  ] = {next: 6    | prev: 0    | value: 1.#QNAN0}
-		[2  ] = {next: 3    | prev: 0    | value: 0.200000}
+		[1  ] = {next: 2    | prev: 7    | value: 3000.000000}
+		[2  ] = {next: 3    | prev: 1    | value: 2000.000000}
 		[3  ] = {next: 4    | prev: 2    | value: 0.300000}
 		[4  ] = {next: 5    | prev: 3    | value: 0.400000}
-		[5  ] = {next: 0    | prev: 4    | value: 0.500000}
-		[6  ] = {next: 7    | prev: 1    | value: 1.#QNAN0}
-		[7  ] = {next: 8    | prev: 6    | value: 1.#QNAN0}
+		[5  ] = {next: 6    | prev: 4    | value: 0.500000}
+		[6  ] = {next: 0    | prev: 5    | value: 1000.000000}
+		[7  ] = {next: 1    | prev: 0    | value: 4000.000000}
 		[8  ] = {next: 9    | prev: 7    | value: 1.#QNAN0}
 		[9  ] = {next: 10   | prev: 8    | value: 1.#QNAN0}
 		[10 ] = {next: 11   | prev: 9    | value: 1.#QNAN0}

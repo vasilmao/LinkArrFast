@@ -157,21 +157,24 @@ void LinkedList_push_before_i(struct LinkedList* list, Elem_t value, size_t inde
             list->array[list->array[place_to_insert].prev].next = list->array[place_to_insert].next;
         }
         if (list->array[place_to_insert].next != 0) {
+            printf("так алло\n");
+            printf("%zu\n", list->array[place_to_insert].next);
+            printf("%zu\n", list->array[place_to_insert].prev);
             list->array[list->array[place_to_insert].next].prev = list->array[place_to_insert].prev;
+            printf("yeee %zu\n", list->array[7].prev);
         }
         if (place_to_insert == list->first_free) {
             list->first_free = list->array[list->first_free].next;
+            list->array[list->first_free].prev = 0;
         }
-        list->array[list->first_free].prev = 0;
     } else {
         list->sorted = false;
         place_to_insert = list->first_free;
+        list->array[list->first_free].prev = place_to_insert;
         list->first_free = list->array[list->first_free].next;
     }
 
     struct Node* array = list->array;
-
-    list->array[list->first_free].prev = 0;
 
     array[place_to_insert].value = value;
     array[place_to_insert].next  = index;
@@ -195,17 +198,39 @@ void LinkedList_pop_physical_i(struct LinkedList* list, size_t pop_i) {
     assert(!isnan(list->array[pop_i].value));
 
     ASSERT_OK
-
-    if (list->sorted && (pop_i == list->head || pop_i == list->tail )) {
-        /* it is still sorted*/
-    } else {
-        list->sorted = false;
-    }
-
     struct Node* array = list->array;
-
     size_t left_i = array[pop_i].prev;
     size_t right_i = array[pop_i].next;
+
+    printf("popeen, %d and %zu and %zu\n", list->sorted, pop_i, list->head);
+    if (list->sorted && (pop_i == list->head || pop_i == list->tail )) {
+        printf("yay!!!\n");
+        if (pop_i == list->head) {
+            if (pop_i == 1) {
+                array[pop_i].value = NAN;
+                array[pop_i].prev  = 0;
+                array[pop_i].next  = list->first_free;
+                array[list->first_free].prev = pop_i;
+            } else {
+                array[pop_i].value = NAN;
+                array[pop_i].prev  = pop_i - 1;
+                array[array[pop_i - 1].next].prev = pop_i;
+                array[pop_i].next  = array[pop_i - 1].next;
+                array[pop_i - 1].next = pop_i;
+            }
+        } else {
+            array[pop_i].value = NAN;
+            array[pop_i].next = pop_i + 1;
+            array[array[pop_i + 1].prev].next = pop_i;
+            array[pop_i].prev = array[pop_i + 1].prev;
+            array[pop_i + 1].prev = pop_i;
+        }
+    } else {
+        list->sorted = false;
+        list->array[list->first_free].prev = pop_i;
+        list->array[pop_i].next = list->first_free;
+        list->first_free = pop_i;
+    }
     if (left_i != 0) {
         array[left_i].next = right_i;
     } else {
@@ -218,12 +243,6 @@ void LinkedList_pop_physical_i(struct LinkedList* list, size_t pop_i) {
         list->tail = left_i;
     }
 
-    array[pop_i].value = NAN;
-    array[pop_i].prev  = 0;
-    array[pop_i].next  = list->first_free;
-
-    list->array[list->first_free].prev = pop_i;
-    list->first_free = pop_i;
     list->size--;
 
     ASSERT_OK
