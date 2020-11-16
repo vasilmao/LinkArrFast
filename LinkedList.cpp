@@ -18,7 +18,9 @@
     list->size++;
 
 
-void LinkedList_pop_sorted_endings(struct LinkedList* list, size_t pop_i);
+void LinkedList_pop_sorted_endings     (struct LinkedList* list, size_t pop_i);
+void LinkedList_push_after_sorted_ends (struct LinkedList* list, Elem_t value, size_t index);
+void LinkedList_push_before_sorted_ends(struct LinkedList* list, Elem_t value, size_t index);
 
 
 struct LinkedList* LinkedList_construct(size_t capacity) {
@@ -105,6 +107,24 @@ void LinkedList_pop_front(struct LinkedList* list) {
     LinkedList_pop_physical_i(list, list->head);
 }
 
+void LinkedList_push_after_sorted_ends(struct LinkedList* list, Elem_t value, size_t index) {
+    assert(list);
+    assert(list->size > 0);
+    assert(!isnan(list->array[index].value));
+    assert(list->sorted);
+    size_t place_to_insert = list->tail + 1;
+    struct Node* array = list->array;
+    if (array[place_to_insert].prev != 0) {
+        array[array[place_to_insert].prev].next = array[place_to_insert].next;
+    }
+    if (array[place_to_insert].next != 0) {
+        array[array[place_to_insert].next].prev = array[place_to_insert].prev;
+    }
+    if (place_to_insert == list->first_free) {
+        list->first_free = array[place_to_insert].next;
+    }
+}
+
 void LinkedList_push_after_i(struct LinkedList* list, Elem_t value, size_t index) {
     assert(list);
     assert(list->size > 0);
@@ -112,25 +132,16 @@ void LinkedList_push_after_i(struct LinkedList* list, Elem_t value, size_t index
 
     ASSERT_OK
     size_t place_to_insert = 0;
+    struct Node* array = list->array;
     if (list->sorted && index == list->tail && index < list->capacity) {
         place_to_insert = list->tail + 1;
-        if (list->array[place_to_insert].prev != 0) {
-            list->array[list->array[place_to_insert].prev].next = list->array[place_to_insert].next;
-        }
-        if (list->array[place_to_insert].next != 0) {
-            list->array[list->array[place_to_insert].next].prev = list->array[place_to_insert].prev;
-        }
-        if (place_to_insert == list->first_free) {
-            list->first_free = list->array[place_to_insert].next;
-        }
+        LinkedList_push_after_sorted_ends(list, value, index);
     } else {
         list->sorted = false;
         place_to_insert = list->first_free;
-        list->first_free = list->array[list->first_free].next;
-        list->array[list->first_free].prev = 0;
+        list->first_free = array[list->first_free].next;
+        array[list->first_free].prev = 0;
     }
-
-    struct Node* array = list->array;
 
     array[place_to_insert].value = value;
     array[place_to_insert].next  = list->array[index].next;
@@ -148,6 +159,25 @@ void LinkedList_push_after_i(struct LinkedList* list, Elem_t value, size_t index
     ASSERT_OK
 }
 
+void LinkedList_push_before_sorted_ends(struct LinkedList* list, Elem_t value, size_t index) {
+    assert(list);
+    assert(list->size > 0);
+    assert(!isnan(list->array[index].value));
+    assert(list->sorted);
+    size_t place_to_insert = list->head - 1;
+    struct Node* array = list->array;
+    if (array[place_to_insert].prev != 0) {
+        array[array[place_to_insert].prev].next = array[place_to_insert].next;
+    }
+    if (array[place_to_insert].next != 0) {
+        array[array[place_to_insert].next].prev = array[place_to_insert].prev;
+    }
+    if (place_to_insert == list->first_free) {
+        list->first_free = array[list->first_free].next;
+        array[list->first_free].prev = 0;
+    }
+}
+
 void LinkedList_push_before_i(struct LinkedList* list, Elem_t value, size_t index) {
     assert(list);
     assert(list->size > 0);
@@ -159,16 +189,7 @@ void LinkedList_push_before_i(struct LinkedList* list, Elem_t value, size_t inde
     if (list->sorted && index == list->head && list->head > 1) {
         /*it is still sorted*/
         place_to_insert = list->head - 1;
-        if (array[place_to_insert].prev != 0) {
-            array[array[place_to_insert].prev].next = array[place_to_insert].next;
-        }
-        if (array[place_to_insert].next != 0) {
-            array[array[place_to_insert].next].prev = array[place_to_insert].prev;
-        }
-        if (place_to_insert == list->first_free) {
-            list->first_free = array[list->first_free].next;
-            array[list->first_free].prev = 0;
-        }
+        LinkedList_push_before_sorted_ends(list, value, index);
     } else {
         list->sorted = false;
         place_to_insert = list->first_free;
@@ -235,7 +256,6 @@ void LinkedList_pop_physical_i(struct LinkedList* list, size_t pop_i) {
     if (left_i != 0) {
         array[left_i].next = right_i;
     }
-
     if (right_i != 0) {
         array[right_i].prev = left_i;
     }
@@ -249,13 +269,11 @@ void LinkedList_pop_physical_i(struct LinkedList* list, size_t pop_i) {
         list->first_free = pop_i;
     }
 
-
     array[pop_i].value = NAN;
 
     if (left_i == 0) {
         list->head = right_i;
     }
-
     if (right_i == 0) {
         list->tail = left_i;
     }
@@ -263,7 +281,6 @@ void LinkedList_pop_physical_i(struct LinkedList* list, size_t pop_i) {
     list->size--;
 
     ASSERT_OK
-
 }
 
 int LinkedList_ok(struct LinkedList* list) {
@@ -289,6 +306,9 @@ int LinkedList_ok(struct LinkedList* list) {
         }
         if (i == list->size - 1 && cur_ind != list->tail) {
             return LASTINDEXERROR;
+        }
+        if (i == list->size - 1 && list->tail != cur_ind) {
+            return TAILERROR;
         }
         cur_ind = list->array[cur_ind].next;
         if (i == list->size - 1 && cur_ind != 0) {
@@ -415,7 +435,9 @@ void LinkedList_sort(struct LinkedList* list) {
         cur_ind = list->array[cur_ind].next;
     }
     for (size_t i = list->size + 1; i < list->capacity; ++i) {
-        new_array[i].next = i + 1;
+        if (i != list->capacity - 1) {
+            new_array[i].next = i + 1;
+        }
         new_array[i].value = NAN;
         if (i != list->size + 1) {
             new_array[i].prev = i - 1;

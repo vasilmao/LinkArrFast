@@ -26,7 +26,7 @@ void test_sort(struct LinkedList* list) {
     printf("%lf\n", LinkedList_get_i(list, 3));
     LinkedList_push_front(list, 3000);
     printf("%lf\n", LinkedList_get_i(list, 3));
-    LinkedList_push_front(list, 4000);
+    //LinkedList_push_front(list, 4000);
     if (list->sorted) {
         printf("Oh! List is still sorted\n");
     } else {
