@@ -17,6 +17,10 @@
     list->tail = push_index;                               \
     list->size++;
 
+
+void LinkedList_pop_sorted_endings(struct LinkedList* list, size_t pop_i);
+
+
 struct LinkedList* LinkedList_construct(size_t capacity) {
     assert(capacity > 0);
     struct LinkedList* list = (struct LinkedList*)calloc(1, sizeof(struct LinkedList));
@@ -123,6 +127,7 @@ void LinkedList_push_after_i(struct LinkedList* list, Elem_t value, size_t index
         list->sorted = false;
         place_to_insert = list->first_free;
         list->first_free = list->array[list->first_free].next;
+        list->array[list->first_free].prev = 0;
     }
 
     struct Node* array = list->array;
@@ -150,31 +155,27 @@ void LinkedList_push_before_i(struct LinkedList* list, Elem_t value, size_t inde
 
     ASSERT_OK
     size_t place_to_insert = 0;
+    struct Node* array = list->array;
     if (list->sorted && index == list->head && list->head > 1) {
         /*it is still sorted*/
         place_to_insert = list->head - 1;
-        if (list->array[place_to_insert].prev != 0) {
-            list->array[list->array[place_to_insert].prev].next = list->array[place_to_insert].next;
+        if (array[place_to_insert].prev != 0) {
+            array[array[place_to_insert].prev].next = array[place_to_insert].next;
         }
-        if (list->array[place_to_insert].next != 0) {
-            printf("так алло\n");
-            printf("%zu\n", list->array[place_to_insert].next);
-            printf("%zu\n", list->array[place_to_insert].prev);
-            list->array[list->array[place_to_insert].next].prev = list->array[place_to_insert].prev;
-            printf("yeee %zu\n", list->array[7].prev);
+        if (array[place_to_insert].next != 0) {
+            array[array[place_to_insert].next].prev = array[place_to_insert].prev;
         }
         if (place_to_insert == list->first_free) {
-            list->first_free = list->array[list->first_free].next;
-            list->array[list->first_free].prev = 0;
+            list->first_free = array[list->first_free].next;
+            array[list->first_free].prev = 0;
         }
     } else {
         list->sorted = false;
         place_to_insert = list->first_free;
-        list->array[list->first_free].prev = place_to_insert;
-        list->first_free = list->array[list->first_free].next;
+        //array[list->first_free].prev = place_to_insert;
+        list->first_free = array[list->first_free].next;
+        list->array[list->first_free].prev = 0;
     }
-
-    struct Node* array = list->array;
 
     array[place_to_insert].value = value;
     array[place_to_insert].next  = index;
@@ -193,6 +194,35 @@ void LinkedList_push_before_i(struct LinkedList* list, Elem_t value, size_t inde
 
 }
 
+void LinkedList_pop_sorted_endings(struct LinkedList* list, size_t pop_i) {
+    assert(list);
+    assert(!isnan(list->array[pop_i].value));
+    assert(list->sorted);
+
+    struct Node* array = list->array;
+    size_t left_i = array[pop_i].prev;
+    size_t right_i = array[pop_i].next;
+    if (pop_i == list->head) {
+        if (pop_i == 1) {
+            array[pop_i].prev  = 0;
+            array[pop_i].next  = list->first_free;
+            array[list->first_free].prev = pop_i;
+        } else {
+            array[pop_i].prev  = pop_i - 1;
+            array[array[pop_i - 1].next].prev = pop_i;
+            array[pop_i].next  = array[pop_i - 1].next;
+            array[pop_i - 1].next = pop_i;
+        }
+    } else {
+
+        array[pop_i].next = pop_i + 1;
+        array[array[pop_i + 1].prev].next = pop_i;
+        array[pop_i].prev = array[pop_i + 1].prev;
+        array[pop_i + 1].prev = pop_i;
+    }
+
+}
+
 void LinkedList_pop_physical_i(struct LinkedList* list, size_t pop_i) {
     assert(list);
     assert(!isnan(list->array[pop_i].value));
@@ -202,44 +232,31 @@ void LinkedList_pop_physical_i(struct LinkedList* list, size_t pop_i) {
     size_t left_i = array[pop_i].prev;
     size_t right_i = array[pop_i].next;
 
-    printf("popeen, %d and %zu and %zu\n", list->sorted, pop_i, list->head);
+    if (left_i != 0) {
+        array[left_i].next = right_i;
+    }
+
+    if (right_i != 0) {
+        array[right_i].prev = left_i;
+    }
+
     if (list->sorted && (pop_i == list->head || pop_i == list->tail )) {
-        printf("yay!!!\n");
-        if (pop_i == list->head) {
-            if (pop_i == 1) {
-                array[pop_i].value = NAN;
-                array[pop_i].prev  = 0;
-                array[pop_i].next  = list->first_free;
-                array[list->first_free].prev = pop_i;
-            } else {
-                array[pop_i].value = NAN;
-                array[pop_i].prev  = pop_i - 1;
-                array[array[pop_i - 1].next].prev = pop_i;
-                array[pop_i].next  = array[pop_i - 1].next;
-                array[pop_i - 1].next = pop_i;
-            }
-        } else {
-            array[pop_i].value = NAN;
-            array[pop_i].next = pop_i + 1;
-            array[array[pop_i + 1].prev].next = pop_i;
-            array[pop_i].prev = array[pop_i + 1].prev;
-            array[pop_i + 1].prev = pop_i;
-        }
+        LinkedList_pop_sorted_endings(list, pop_i);
     } else {
         list->sorted = false;
         list->array[list->first_free].prev = pop_i;
         list->array[pop_i].next = list->first_free;
         list->first_free = pop_i;
     }
-    if (left_i != 0) {
-        array[left_i].next = right_i;
-    } else {
+
+
+    array[pop_i].value = NAN;
+
+    if (left_i == 0) {
         list->head = right_i;
     }
 
-    if (right_i != 0) {
-        array[right_i].prev = left_i;
-    } else {
+    if (right_i == 0) {
         list->tail = left_i;
     }
 
@@ -328,10 +345,6 @@ void LinkedList_make_graph(struct LinkedList* list) {
     size_t cur_elem = list->head;
     struct Node* array = list->array;
     for (size_t i = 0; i < list->capacity; ++i) {
-        // if (cur_elem == 0) {
-        //     break;
-        // }
-        //fprintf(output, "\tel%-8zu [shape=record,label=\"{{pos:\\n %zu | ind:\\n %zu} | { <f1>prev:\\n %zu | value:\\n %lf | <f2> next:\\n %zu}}\"];\n", cur_elem, i, cur_elem, last_elem, array[cur_elem].value, next_elem);
         cur_elem = i;
         size_t last_elem = array[cur_elem].prev;
         size_t next_elem = array[cur_elem].next;
