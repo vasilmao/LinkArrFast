@@ -2,25 +2,25 @@ digraph structs {
 	rankdir=HR;
 	el0        [shape=record,label="{{<f0> phys pos:\n 0} | { <f1>prev:\n 0 | value:\n 1.#QNAN0 | <f2> next:\n 0}}"style=filled,color="red"]
 el0        ->el1        [style=invis]
-	el1        [shape=record,label="{{<f0> phys pos:\n 1} | { <f1>prev:\n 0 | value:\n 3000.000000 | <f2> next:\n 2}}"]
+	el1        [shape=record,label="{{<f0> phys pos:\n 1} | { <f1>prev:\n 4 | value:\n 1.000000 | <f2> next:\n 2}}"]
 el1        ->el2        [style=invis]
-	el2        [shape=record,label="{{<f0> phys pos:\n 2} | { <f1>prev:\n 1 | value:\n 2000.000000 | <f2> next:\n 3}}"]
+	el2        [shape=record,label="{{<f0> phys pos:\n 2} | { <f1>prev:\n 1 | value:\n 2.000000 | <f2> next:\n 3}}"]
 el2        ->el3        [style=invis]
-	el3        [shape=record,label="{{<f0> phys pos:\n 3} | { <f1>prev:\n 2 | value:\n 0.400000 | <f2> next:\n 4}}"]
+	el3        [shape=record,label="{{<f0> phys pos:\n 3} | { <f1>prev:\n 2 | value:\n 6.000000 | <f2> next:\n 0}}"]
 el3        ->el4        [style=invis]
-	el4        [shape=record,label="{{<f0> phys pos:\n 4} | { <f1>prev:\n 3 | value:\n -20.000000 | <f2> next:\n 5}}"]
+	el4        [shape=record,label="{{<f0> phys pos:\n 4} | { <f1>prev:\n 0 | value:\n 4.000000 | <f2> next:\n 1}}"]
 el4        ->el5        [style=invis]
-	el5        [shape=record,label="{{<f0> phys pos:\n 5} | { <f1>prev:\n 4 | value:\n 20.000000 | <f2> next:\n 6}}"]
+	el5        [shape=record,label="{{<f0> phys pos:\n 5} | { <f1>prev:\n 0 | value:\n 1.#QNAN0 | <f2> next:\n 6}}"style=filled,color="red"]
 el5        ->el6        [style=invis]
-	el6        [shape=record,label="{{<f0> phys pos:\n 6} | { <f1>prev:\n 5 | value:\n 0.500000 | <f2> next:\n 7}}"]
+	el6        [shape=record,label="{{<f0> phys pos:\n 6} | { <f1>prev:\n 5 | value:\n 1.#QNAN0 | <f2> next:\n 7}}"style=filled,color="red"]
 el6        ->el7        [style=invis]
-	el7        [shape=record,label="{{<f0> phys pos:\n 7} | { <f1>prev:\n 6 | value:\n 10.000000 | <f2> next:\n 8}}"]
+	el7        [shape=record,label="{{<f0> phys pos:\n 7} | { <f1>prev:\n 6 | value:\n 1.#QNAN0 | <f2> next:\n 8}}"style=filled,color="red"]
 el7        ->el8        [style=invis]
-	el8        [shape=record,label="{{<f0> phys pos:\n 8} | { <f1>prev:\n 7 | value:\n -10.000000 | <f2> next:\n 9}}"]
+	el8        [shape=record,label="{{<f0> phys pos:\n 8} | { <f1>prev:\n 7 | value:\n 1.#QNAN0 | <f2> next:\n 9}}"style=filled,color="red"]
 el8        ->el9        [style=invis]
-	el9        [shape=record,label="{{<f0> phys pos:\n 9} | { <f1>prev:\n 8 | value:\n 1000.000000 | <f2> next:\n 0}}"]
+	el9        [shape=record,label="{{<f0> phys pos:\n 9} | { <f1>prev:\n 8 | value:\n 1.#QNAN0 | <f2> next:\n 10}}"style=filled,color="red"]
 el9        ->el10       [style=invis]
-	el10       [shape=record,label="{{<f0> phys pos:\n 10} | { <f1>prev:\n 0 | value:\n 1.#QNAN0 | <f2> next:\n 11}}"style=filled,color="red"]
+	el10       [shape=record,label="{{<f0> phys pos:\n 10} | { <f1>prev:\n 9 | value:\n 1.#QNAN0 | <f2> next:\n 11}}"style=filled,color="red"]
 el10       ->el11       [style=invis]
 	el11       [shape=record,label="{{<f0> phys pos:\n 11} | { <f1>prev:\n 10 | value:\n 1.#QNAN0 | <f2> next:\n 12}}"style=filled,color="red"]
 el11       ->el12       [style=invis]
@@ -1000,22 +1000,22 @@ el497      ->el498      [style=invis]
 el498      ->el499      [style=invis]
 	el499      [shape=record,label="{{<f0> phys pos:\n 499} | { <f1>prev:\n 498 | value:\n 1.#QNAN0 | <f2> next:\n 0}}"style=filled,color="red"]
 	el1       :<f2> -> el2       :<f0> [color="red"];
+	el1       :<f1> -> el4       :<f0> [color="blue"];
 	el2       :<f2> -> el3       :<f0> [color="red"];
 	el2       :<f1> -> el1       :<f0> [color="blue"];
-	el3       :<f2> -> el4       :<f0> [color="red"];
 	el3       :<f1> -> el2       :<f0> [color="blue"];
-	el4       :<f2> -> el5       :<f0> [color="red"];
-	el4       :<f1> -> el3       :<f0> [color="blue"];
+	el4       :<f2> -> el1       :<f0> [color="red"];
 	el5       :<f2> -> el6       :<f0> [color="red"];
-	el5       :<f1> -> el4       :<f0> [color="blue"];
 	el6       :<f2> -> el7       :<f0> [color="red"];
 	el6       :<f1> -> el5       :<f0> [color="blue"];
 	el7       :<f2> -> el8       :<f0> [color="red"];
 	el7       :<f1> -> el6       :<f0> [color="blue"];
 	el8       :<f2> -> el9       :<f0> [color="red"];
 	el8       :<f1> -> el7       :<f0> [color="blue"];
+	el9       :<f2> -> el10      :<f0> [color="red"];
 	el9       :<f1> -> el8       :<f0> [color="blue"];
 	el10      :<f2> -> el11      :<f0> [color="red"];
+	el10      :<f1> -> el9       :<f0> [color="blue"];
 	el11      :<f2> -> el12      :<f0> [color="red"];
 	el11      :<f1> -> el10      :<f0> [color="blue"];
 	el12      :<f2> -> el13      :<f0> [color="red"];
@@ -1993,29 +1993,14 @@ el498      ->el499      [style=invis]
 	el498     :<f2> -> el499     :<f0> [color="red"];
 	el498     :<f1> -> el497     :<f0> [color="blue"];
 	el499     :<f1> -> el498     :<f0> [color="blue"];
-	ellog1     [shape=record,label="{{logical_pos: 0 |<f0> phys pos:\n 1} | { <f1>prev:\n 0 | value:\n 3000.000000 | <f2> next:\n 2}}"]
-	ellog2     [shape=record,label="{{logical_pos: 1 |<f0> phys pos:\n 2} | { <f1>prev:\n 1 | value:\n 2000.000000 | <f2> next:\n 3}}"]
-	ellog3     [shape=record,label="{{logical_pos: 2 |<f0> phys pos:\n 3} | { <f1>prev:\n 2 | value:\n 0.400000 | <f2> next:\n 4}}"]
-	ellog4     [shape=record,label="{{logical_pos: 3 |<f0> phys pos:\n 4} | { <f1>prev:\n 3 | value:\n -20.000000 | <f2> next:\n 5}}"]
-	ellog5     [shape=record,label="{{logical_pos: 4 |<f0> phys pos:\n 5} | { <f1>prev:\n 4 | value:\n 20.000000 | <f2> next:\n 6}}"]
-	ellog6     [shape=record,label="{{logical_pos: 5 |<f0> phys pos:\n 6} | { <f1>prev:\n 5 | value:\n 0.500000 | <f2> next:\n 7}}"]
-	ellog7     [shape=record,label="{{logical_pos: 6 |<f0> phys pos:\n 7} | { <f1>prev:\n 6 | value:\n 10.000000 | <f2> next:\n 8}}"]
-	ellog8     [shape=record,label="{{logical_pos: 7 |<f0> phys pos:\n 8} | { <f1>prev:\n 7 | value:\n -10.000000 | <f2> next:\n 9}}"]
-	ellog9     [shape=record,label="{{logical_pos: 8 |<f0> phys pos:\n 9} | { <f1>prev:\n 8 | value:\n 1000.000000 | <f2> next:\n 0}}"]
+	ellog4     [shape=record,label="{{logical_pos: 0 |<f0> phys pos:\n 4} | { <f1>prev:\n 0 | value:\n 4.000000 | <f2> next:\n 1}}"]
+	ellog1     [shape=record,label="{{logical_pos: 1 |<f0> phys pos:\n 1} | { <f1>prev:\n 4 | value:\n 1.000000 | <f2> next:\n 2}}"]
+	ellog2     [shape=record,label="{{logical_pos: 2 |<f0> phys pos:\n 2} | { <f1>prev:\n 1 | value:\n 2.000000 | <f2> next:\n 3}}"]
+	ellog3     [shape=record,label="{{logical_pos: 3 |<f0> phys pos:\n 3} | { <f1>prev:\n 2 | value:\n 6.000000 | <f2> next:\n 0}}"]
+	ellog4    :<f2> -> ellog1    :<f0> [color="red"];
 	ellog1    :<f2> -> ellog2    :<f0> [color="red"];
+	ellog1    :<f1> -> ellog4    :<f0> [color="blue"];
 	ellog2    :<f2> -> ellog3    :<f0> [color="red"];
 	ellog2    :<f1> -> ellog1    :<f0> [color="blue"];
-	ellog3    :<f2> -> ellog4    :<f0> [color="red"];
 	ellog3    :<f1> -> ellog2    :<f0> [color="blue"];
-	ellog4    :<f2> -> ellog5    :<f0> [color="red"];
-	ellog4    :<f1> -> ellog3    :<f0> [color="blue"];
-	ellog5    :<f2> -> ellog6    :<f0> [color="red"];
-	ellog5    :<f1> -> ellog4    :<f0> [color="blue"];
-	ellog6    :<f2> -> ellog7    :<f0> [color="red"];
-	ellog6    :<f1> -> ellog5    :<f0> [color="blue"];
-	ellog7    :<f2> -> ellog8    :<f0> [color="red"];
-	ellog7    :<f1> -> ellog6    :<f0> [color="blue"];
-	ellog8    :<f2> -> ellog9    :<f0> [color="red"];
-	ellog8    :<f1> -> ellog7    :<f0> [color="blue"];
-	ellog9    :<f1> -> ellog8    :<f0> [color="blue"];
 }

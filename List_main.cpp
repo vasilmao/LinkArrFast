@@ -8,9 +8,9 @@ void test_sort(struct LinkedList* list);
 
 int main() {
     struct LinkedList* list = LinkedList_construct(500);
-    //test(list);
-    test_get_index(list);
-    test_sort(list);
+    test(list);
+    //test_get_index(list);
+    //test_sort(list);
     LinkedList_dump(list);
     return 0;
 }
