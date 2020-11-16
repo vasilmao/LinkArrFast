@@ -10,8 +10,8 @@ int main() {
     struct LinkedList* list = LinkedList_construct(500);
     //test(list);
     test_get_index(list);
+    test_sort(list);
     LinkedList_dump(list);
-    //test_sort(list);
     return 0;
 }
 
@@ -19,8 +19,12 @@ int main() {
 
 void test_sort(struct LinkedList* list) {
     LinkedList_sort(list);
-    printf("%lf\n", LinkedList_get_i_sorted(list, 2));
-    LinkedList_push_back(list, 1000);
+    //printf("%lf\n", LinkedList_get_i_sorted(list, 2));
+    //LinkedList_push_back(list, 1000);
+    LinkedList_pop_front(list);
+    //LinkedList_pop_front(list);
+    //LinkedList_push_back(list, 1000);
+    //LinkedList_push_front(list, 2000);
     printf("%d\n", list->sorted);
 }
 
@@ -31,10 +35,10 @@ void test_get_index(struct LinkedList* list) {
     LinkedList_push_back(list, 0.4); // log 3
     LinkedList_push_back(list, 0.5); // log 4
     size_t physical_ind = LinkedList_get_physical_index(list, 2);
-    LinkedList_push_after_i(list, -10, physical_ind);
-    LinkedList_push_after_i(list, 10, physical_ind);
-    LinkedList_push_before_i(list, -20, physical_ind);
-    LinkedList_push_before_i(list, 20, physical_ind);
+    //LinkedList_push_after_i(list, -10, physical_ind);
+    //LinkedList_push_after_i(list, 10, physical_ind);
+    //LinkedList_push_before_i(list, -20, physical_ind);
+    //LinkedList_push_before_i(list, 20, physical_ind);
 }
 
 void test(struct LinkedList* list) {
