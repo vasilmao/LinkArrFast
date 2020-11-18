@@ -6,10 +6,11 @@
     #define ASSERT_OK
 #endif
 
-void   LinkedListPopSortedEnd     (struct LinkedList* list, size_t pop_index);
-void   LinkedListPushSortedLinking    (struct LinkedList* list, Elem_t value, size_t index);
-size_t LinkedListUpdateFreeCell   (struct LinkedList* list);
-void LinkedListInsertEmpty        (struct LinkedList* list, Elem_t value);
+void   LinkedListPopSortedEnd      (struct LinkedList* list, size_t pop_index);
+void   LinkedListPushSortedLinking (struct LinkedList* list, Elem_t value, size_t index);
+size_t LinkedListUpdateFreeCell    (struct LinkedList* list);
+void   LinkedListInsertEmpty       (struct LinkedList* list, Elem_t value);
+void   freeNode                    (struct LinkedList* list, size_t free_index);
 
 
 struct LinkedList* NewLinkedList(size_t capacity) {
@@ -188,7 +189,7 @@ void LinkedListPushBeforePhysI(struct LinkedList* list, Elem_t value, size_t ind
     if (list->sorted && index == list->head && list->head > 1) {
         /*it is still sorted*/
         place_to_insert = list->head - 1;
-        LinkedListPushSortedLinking(list, list->head - 1);
+        LinkedListPushSortedLinking(list, place_to_insert);
     } else {
         list->sorted = false;
         place_to_insert = LinkedListUpdateFreeCell(list);
@@ -251,7 +252,7 @@ void LinkedListPopPhysI(struct LinkedList* list, size_t pop_index) {
     assert(!isnan(list->array[pop_index].value));
 
     ASSERT_OK
-    //create func freeNode overload
+
     struct Node* array = list->array;
     size_t left_i = array[pop_index].prev;
     size_t right_i = array[pop_index].next;
@@ -366,12 +367,12 @@ void LinkedList_make_graph(struct LinkedList* list) {
         size_t next_elem = array[i].next;
         fprintf(output, "\tel%-8zu [shape=record,label=\"{{<f0> phys pos:\\n %zu} | { <f1>prev:\\n %zu | value:\\n %lf | <f2> next:\\n %zu}}\"", i, i, last_elem, array[i].value, next_elem);
         if (isnan(array[i].value)) {
-            fprintf(output, "style=filled,color=\"red\"]\n");
+            fprintf(output, "style=filled,fillcolor=\"#ff8080\"]\n");
         } else {
             fprintf(output, "]\n");
         }
         if (i < list->capacity - 1) {
-            fprintf(output, "el%-8zu ->el%-8zu [style=invis]\n", i, i + 1);
+            fprintf(output, "\tel%-8zu ->el%-8zu [style=invis]\n", i, i + 1);
         }
     }
     size_t cur_elem = list->head;
@@ -446,6 +447,11 @@ void LinkedListSort(struct LinkedList* list) {
     list->sorted = true;
 
     ASSERT_OK
+}
+
+void DestroyLinkedList(struct LinkedList* list) {
+    free(list->array);
+    free(list);
 }
 
 Elem_t LinkedListGetIthLogicalSorted(struct LinkedList* list, size_t index) {

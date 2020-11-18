@@ -46,3 +46,4 @@ void   LinkedList_dump               (struct LinkedList* list);
 int    LinkedList_ok                 (struct LinkedList* list);
 void   LinkedListSort                (struct LinkedList* list);
 Elem_t LinkedListGetIthLogicalSorted (struct LinkedList* list, size_t index);
+void   DestroyLinkedList             (struct LinkedList* list);

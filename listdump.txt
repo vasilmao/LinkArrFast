@@ -1,22 +1,22 @@
-LinkedList [006E2B88] (LISTOK) {
+LinkedList [006C2B88] (LISTOK) {
 	capacity   = 500 
-	size       = 8   
+	size       = 9   
 	first_free = 10  
-	head       = 2   
-	tail       = 9   
-	sorted     = 1   
-	array [006E4C80] {
+	head       = 1   
+	tail       = 5   
+	sorted     = 0   
+	array [006C2D38] {
 		[0  ] = {next: 0    | prev: 0    | value: 1.#QNAN0}
-		[1  ] = {next: 10   | prev: 0    | value: 1.#QNAN0}
-		[2  ] = {next: 3    | prev: 0    | value: 2000.000000}
-		[3  ] = {next: 4    | prev: 2    | value: 0.300000}
-		[4  ] = {next: 5    | prev: 3    | value: -20.000000}
-		[5  ] = {next: 6    | prev: 4    | value: 20.000000}
-		[6  ] = {next: 7    | prev: 5    | value: 0.400000}
-		[7  ] = {next: 8    | prev: 6    | value: 10.000000}
-		[8  ] = {next: 9    | prev: 7    | value: -10.000000}
-		[9  ] = {next: 0    | prev: 8    | value: 1000.000000}
-		[10 ] = {next: 11   | prev: 1    | value: 1.#QNAN0}
+		[1  ] = {next: 2    | prev: 0    | value: 0.100000}
+		[2  ] = {next: 3    | prev: 1    | value: 0.200000}
+		[3  ] = {next: 8    | prev: 2    | value: 0.300000}
+		[4  ] = {next: 7    | prev: 9    | value: 0.400000}
+		[5  ] = {next: 0    | prev: 6    | value: 0.500000}
+		[6  ] = {next: 5    | prev: 7    | value: -10.000000}
+		[7  ] = {next: 6    | prev: 4    | value: 10.000000}
+		[8  ] = {next: 9    | prev: 3    | value: -20.000000}
+		[9  ] = {next: 4    | prev: 8    | value: 20.000000}
+		[10 ] = {next: 11   | prev: 0    | value: 1.#QNAN0}
 		[11 ] = {next: 12   | prev: 10   | value: 1.#QNAN0}
 		[12 ] = {next: 13   | prev: 11   | value: 1.#QNAN0}
 		[13 ] = {next: 14   | prev: 12   | value: 1.#QNAN0}
